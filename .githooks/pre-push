@@ -1,0 +1,30 @@
+#!/bin/sh
+echo "Running ktlint check..."
+KTLINT_OUTPUT="/tmp/ktlint-$(date +%s)"
+./gradlew ktlintCheck > "$KTLINT_OUTPUT"
+KTLINT_EXIT_CODE=$?
+if [ "$KTLINT_EXIT_CODE" != 0 ]; then
+  cat "$KTLINT_OUTPUT"
+  rm "$KTLINT_OUTPUT"
+  echo "***********************************************"
+  echo "                 KtLint failed                 "
+  echo " Please fix the above issues before committing "
+  echo "***********************************************"
+  exit "$KTLINT_EXIT_CODE"
+fi
+rm "$KTLINT_OUTPUT"
+
+echo "Running detekt check..."
+DETEKT_OUTPUT="/tmp/detekt-$(date +%s)"
+./gradlew detekt > "$DETEKT_OUTPUT"
+DETEKT_EXIT_CODE=$?
+if [ "$DETEKT_EXIT_CODE" -ne 0 ]; then
+  cat "$DETEKT_OUTPUT"
+  rm "$DETEKT_OUTPUT"
+  echo "***********************************************"
+  echo "                 Detekt failed                 "
+  echo " Please fix the above issues before committing "
+  echo "***********************************************"
+  exit "$DETEKT_EXIT_CODE"
+fi
+rm "$DETEKT_OUTPUT"

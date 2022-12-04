@@ -13,6 +13,6 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "kmm_exchange"
-include(":android")
+rootProject.name = "mocket"
+include(":androidApp")
 include(":shared")

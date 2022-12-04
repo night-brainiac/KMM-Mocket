@@ -2,6 +2,7 @@ plugins {
     kotlin("multiplatform")
     kotlin("native.cocoapods")
     id("com.android.library")
+    id("org.jetbrains.dokka")
 }
 
 kotlin {
@@ -15,12 +16,12 @@ kotlin {
         homepage = "Link to the Shared Module homepage"
         version = "1.0"
         ios.deploymentTarget = "14.1"
-        podfile = project.file("../ios/Podfile")
+        podfile = project.file("../iosApp/Podfile")
         framework {
             baseName = "shared"
         }
     }
-    
+
     sourceSets {
         val commonMain by getting
         val commonTest by getting {
@@ -54,7 +55,7 @@ kotlin {
 }
 
 android {
-    namespace = "me.night_brainiac.kmm_exchange"
+    namespace = "me.night_brainiac.mocket"
     compileSdk = 33
 
     defaultConfig {
