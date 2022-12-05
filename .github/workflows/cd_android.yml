@@ -1,0 +1,92 @@
+name: cd-android
+on:
+  pull_request:
+    types:
+      - closed
+    branches:
+      - develope
+  push:
+    branches:
+      - develope
+  workflow_dispatch: # Allows you to run this workflow manually from the Actions tab
+jobs:
+  gradle_validation:
+    name: vValidate Gradle Wrapper
+    runs-on: ubuntu-latest
+    steps:
+
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your workflow can access it
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      # Validates the checksums of Gradle Wrapper JAR files present in the source tree
+      - name: Validate Gradle Wrapper
+        uses: gradle/wrapper-validation-action@v1
+
+  generate_apk:
+    name: Generate APK
+    runs-on: ubuntu-latest
+    needs: gradle_validation
+    steps:
+
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your workflow can access it
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      # Create google-services.json for Firebase plugins with repository secrets
+      - name: Generate google-services.json
+        env:
+          FIREBASE_PROJECT_INFO_AND_CLIENT: ${{ secrets.FIREBASE_PROJECT_INFO_AND_CLIENT }}
+        run: echo "$FIREBASE_PROJECT_INFO_AND_CLIENT" | base64 --decode >> androidApp/google-services.json
+
+      # Generate an APK
+      - name: Generate debug APK
+        run: ./gradlew assembleDebug --full-stacktrace
+
+      # Allowing you to share data between jobs and store data
+      - name: Upload debug APK
+        uses: actions/upload-artifact@v3
+        with:
+          name: androidApp-debug
+          path: androidApp/build/outputs/apk/debug/androidApp-debug.apk
+
+  distribution_apk:
+    name: Distribution APK to testers
+    runs-on: ubuntu-latest
+    needs: generate_apk
+
+    # Add "id-token" with the intended permissions
+    permissions:
+      contents: 'read'
+      id-token: 'write'
+    steps:
+
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your workflow can access it
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      # This downloads artifacts from your build
+      - name: Download debug APK
+        uses: actions/download-artifact@v3
+        with:
+          name: androidApp-debug
+
+      # Establishes authentication to Google Cloud
+      - name: Set up GCP auth
+        uses: google-github-actions/auth@v1
+        with:
+          workload_identity_provider: ${{ secrets.GCP_WIP }}
+          service_account: ${{ secrets.GCP_SERVICE_ACCOUNT}}
+
+      # Configures the Google Cloud SDK
+      - name: Set up Google Cloud SDK
+        uses: google-github-actions/setup-gcloud@v0
+
+      # Distribute APK to testers
+      - name: Distribution APK to tester
+        uses: wzieba/Firebase-Distribution-Github-Action@v1
+        with:
+          appId: ${{ secrets.FIREBASE_APP_ID }}
+          serviceCredentialsFileContent: ${{ secrets.GCP_SERVICE_ACCOUNT_KEY }}
+          groups: tester
+          file: androidApp-debug.apk
