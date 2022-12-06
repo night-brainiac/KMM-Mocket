@@ -1,0 +1,28 @@
+name: dependency-graph
+on:
+  pull_request:
+    types:
+      - closed
+    branches:
+      - main
+  workflow_dispatch: # Allows you to run this workflow manually from the Actions tab
+jobs:
+  generate_dependencies_graph:
+    name: Generate Depnedencies Graph
+    runs-on: ubuntu-latest
+    steps:
+
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your workflow can access it
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      # Calculates dependencies for a Gradle build-target and submits the list to the Dependency Submission API
+      - name: Run snapshot action
+        uses: mikepenz/gradle-dependency-submission@main
+        with:
+          gradle-build-module: |-
+            :shared
+            :androidApp
+          gradle-build-configuration: |-
+            debugCompileClasspath
+          include-build-environment: true
