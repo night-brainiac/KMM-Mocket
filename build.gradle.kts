@@ -19,7 +19,7 @@ plugins {
 
 // Dokka - For documenting Gradle multi-module projects
 tasks.dokkaHtmlMultiModule.configure {
-    outputDirectory.set(file("docs/dokka/")) // Custom output directory.
+    outputDirectory.set(file("docs/")) // Custom output directory.
 }
 
 // KtLint
