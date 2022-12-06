@@ -1,0 +1,7 @@
+$dokka.format:html-v1
+$dokka.linkExtension:html
+
+module:androidApp
+me.night_brainiac.mocket.android
+module:shared
+me.night_brainiac.mocket
