@@ -58,7 +58,6 @@ val TOP_LEVEL_DESTINATIONS = listOf(
 class NavigationActions(private val navController: NavHostController) {
     fun navigateTo(destination: TopLevelDestination) {
         navController.navigate(destination.route) {
-
             // Pop up to the start destination of the graph to avoid building up a large stack of destinations on the back stack as users select items
             popUpTo(navController.graph.findStartDestination().id) {
                 saveState = true

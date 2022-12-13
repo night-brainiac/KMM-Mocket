@@ -41,7 +41,7 @@ val lightColorScheme = lightColorScheme(
     inversePrimary = Color(0xFFFFB1C5),
     surfaceTint = Color(0xFF9D3D5E),
     outlineVariant = Color(0xFFD6C2C5),
-    scrim = Color(0xFF000000),
+    scrim = Color(0xFF000000)
 )
 
 private val darkColorScheme = darkColorScheme(
@@ -73,7 +73,7 @@ private val darkColorScheme = darkColorScheme(
     onErrorContainer = Color(0xFFFFDAD6),
     outline = Color(0xFF9E8C90),
     outlineVariant = Color(0xFF514346),
-    scrim = Color(0xFF000000),
+    scrim = Color(0xFF000000)
 )
 
 @Composable

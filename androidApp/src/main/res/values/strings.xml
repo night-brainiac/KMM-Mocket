@@ -11,8 +11,14 @@
     <!-- Content Description -->
     <string name="cd_icon">Icon</string>
     <string name="cd_navigation_drawer">Navigation Drawer</string>
+    <string name="cd_connect_wallet">Connect Wallet</string>
 
     <!-- Empty Screen -->
     <string name="empty_screen_tv_title">Coming Soon</string>
     <string name="empty_screen_tv_subtitle">This screen is still under construction.</string>
+
+    <!-- Connect Wallet -->
+    <string name="connect_wallet_tv_title">Login into your wallet</string>
+    <string name="connect_wallet_tv_subtitle">Connect to any WalletConnect supported wallet to securely store your digital goods and cryptocurrencies.</string>
+    <string name="connect_wallet_bt_connect">Connect Wallet</string>
 </resources>

@@ -28,7 +28,7 @@ fun NavigationRail(
     selectedDestination: String,
     navigationContentPosition: NavigationContentPosition,
     navigateToTopLevelDestination: (TopLevelDestination) -> Unit,
-    onDrawerClicked: () -> Unit = {},
+    onDrawerClicked: () -> Unit = {}
 ) {
     NavigationRail(
         modifier = Modifier.fillMaxHeight(),
@@ -144,7 +144,7 @@ fun BottomNavigationBar(
 fun PermanentNavigationDrawerContent(
     selectedDestination: String,
     navigationContentPosition: NavigationContentPosition,
-    navigateToTopLevelDestination: (TopLevelDestination) -> Unit,
+    navigateToTopLevelDestination: (TopLevelDestination) -> Unit
 ) {
     PermanentDrawerSheet(modifier = Modifier.sizeIn(minWidth = 100.dp, maxWidth = 200.dp)) {
         // TODO remove custom nav drawer content positioning when NavDrawer component supports it. ticket : b/232495216
@@ -174,7 +174,7 @@ fun PermanentNavigationDrawerContent(
                     modifier = Modifier
                         .layoutId(LayoutType.CONTENT)
                         .verticalScroll(rememberScrollState()),
-                    horizontalAlignment = Alignment.CenterHorizontally,
+                    horizontalAlignment = Alignment.CenterHorizontally
                 ) {
                     TOP_LEVEL_DESTINATIONS.forEach { destination ->
                         NavigationDrawerItem(
@@ -225,7 +225,7 @@ fun PermanentNavigationDrawerContent(
                         // parent (ignoring the header for now)
                         NavigationContentPosition.TOP -> 0
                         NavigationContentPosition.CENTER -> nonContentVerticalSpace / 2
-                    }.coerceAtLeast(headerPlaceable.height)  // And finally, make sure we don't overlap with the header.
+                    }.coerceAtLeast(headerPlaceable.height) // And finally, make sure we don't overlap with the header.
                     contentPlaceable.placeRelative(0, contentPlaceableY)
                 }
             }
@@ -277,7 +277,7 @@ fun ModalNavigationDrawerContent(
                     modifier = Modifier
                         .layoutId(LayoutType.CONTENT)
                         .verticalScroll(rememberScrollState()),
-                    horizontalAlignment = Alignment.CenterHorizontally,
+                    horizontalAlignment = Alignment.CenterHorizontally
                 ) {
                     TOP_LEVEL_DESTINATIONS.forEach { destination ->
                         NavigationDrawerItem(

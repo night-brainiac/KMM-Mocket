@@ -23,12 +23,11 @@ import androidx.window.layout.DisplayFeature
 import androidx.window.layout.FoldingFeature
 import kotlinx.coroutines.launch
 import me.night_brainiac.mocket.android.ui.base.EmptyScreen
-import me.night_brainiac.mocket.android.ui.navigation.*
+import me.night_brainiac.mocket.android.ui.profile.connect_wallet.ConnectWalletScreen
 import me.night_brainiac.mocket.android.util.*
 
 @Composable
 fun AdaptiveLayouts(windowSize: WindowSizeClass, displayFeatures: List<DisplayFeature>) {
-
     /**
      * We are using display's folding features to map the device postures a fold is in.
      * In the state of folding device If it's half fold in BookPosture we want to avoid content at the crease/hinge
@@ -104,7 +103,7 @@ private fun NavigationWrapper(
             PermanentNavigationDrawerContent(
                 selectedDestination = selectedDestination,
                 navigationContentPosition = navigationContentPosition,
-                navigateToTopLevelDestination = navigationActions::navigateTo,
+                navigateToTopLevelDestination = navigationActions::navigateTo
             )
         }) {
             NavContent(
@@ -170,7 +169,7 @@ fun NavContent(
                 selectedDestination = selectedDestination,
                 navigationContentPosition = navigationContentPosition,
                 navigateToTopLevelDestination = navigateToTopLevelDestination,
-                onDrawerClicked = onDrawerClicked,
+                onDrawerClicked = onDrawerClicked
             )
         }
         Column(
@@ -216,7 +215,7 @@ private fun NavHost(
         }
         composable(NavRoute.PROFILE) {
             // TODO According to user info if exist to show screen of profile or connect wallet
-            EmptyScreen()
+            ConnectWalletScreen()
         }
         composable(NavRoute.MORE) {
             EmptyScreen()
