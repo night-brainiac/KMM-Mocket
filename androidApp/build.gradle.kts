@@ -12,7 +12,7 @@ android {
 
     defaultConfig {
         applicationId = "me.night_brainiac.mocket.android"
-        minSdk = 21
+        minSdk = 23 // WalletConnect minimum support 23
         targetSdk = 33
         versionCode = 1
         versionName = "1.0"
@@ -44,7 +44,7 @@ android {
 
     packagingOptions {
         resources {
-            excludes += "/META-INF/{AL2.0,LGPL2.1}"
+            excludes += "/META-INF/{AL2.0,LGPL2.1,INDEX.LIST,DEPENDENCIES,LICENSE.md,NOTICE.md}"
         }
     }
 }
@@ -55,13 +55,18 @@ dependencies {
     implementation(project(":shared"))
 
     // Compose UI
-    implementation("androidx.compose.ui:ui:1.3.1") // This library contains the primitives that form the Compose UI Toolkit.
-    implementation("androidx.compose.ui:ui-tooling-preview:1.3.1") // This library provides the API required to declare @Preview composables.
-    implementation("androidx.compose.material:material:1.3.1") // TODO upgrade to Material3
-    implementation("androidx.compose.foundation:foundation:1.3.1") // Providing the high-level building blocks for both application and design-system developers.
-    implementation("androidx.activity:activity-compose:1.6.1") // Compose integration with Activity.
+    implementation(platform("androidx.compose:compose-bom:2022.10.00"))
+    implementation("androidx.compose.material3:material3") // Includes updated theming and components and Material You personalization features like dynamic color.
+    implementation("androidx.compose.material3:material3-window-size-class") // window size utils
+    implementation("androidx.compose.material:material-icons-extended") // Contains all Material icons
+    implementation("androidx.activity:activity-compose:1.6.1") // Integration with Activity.
 
-    debugImplementation("androidx.compose.ui:ui-tooling:1.3.1") // This library exposes information to our tools for better IDE support.
+    // Compose UI - Android Studio Preview Support
+    implementation("androidx.compose.ui:ui-tooling-preview:1.3.2") // Provides the API required to declare @Preview composables.
+    debugImplementation("androidx.compose.ui:ui-tooling:1.3.2") // Exposes information to our tools for better IDE support.
+
+    // Adaptive
+    implementation("com.google.accompanist:accompanist-adaptive:0.28.0")
 
     // Firebase
     implementation(platform("com.google.firebase:firebase-bom:31.1.0")) // Import the BoM for the Firebase platform that you don't have to specify versions in Firebase library dependencies.
@@ -69,8 +74,13 @@ dependencies {
     implementation("com.google.firebase:firebase-analytics-ktx") // Collects usage and behavior data.
     implementation("com.google.firebase:firebase-perf-ktx") // Collect performance data.
 
+    // Koin - A pragmatic lightweight dependency injection framework
+    implementation("io.insert-koin:koin-android:3.3.0") // Android
+    implementation("io.insert-koin:koin-androidx-compose:3.3.0") // Jetpack Compose
+    implementation("io.insert-koin:koin-androidx-navigation:3.3.0") // Jetpack Navigation
+
     // Detection
-    debugImplementation("com.squareup.leakcanary:leakcanary-android:2.10") //  A memory leak detection library for Android.
+    debugImplementation("com.squareup.leakcanary:leakcanary-android:2.10") //  Provides memory leak detection.
 
     // Unit Test
     androidTestImplementation("androidx.test:runner:1.5.1")

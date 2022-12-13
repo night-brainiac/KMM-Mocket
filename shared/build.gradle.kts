@@ -23,14 +23,31 @@ kotlin {
     }
 
     sourceSets {
-        val commonMain by getting
+        val commonMain by getting {
+            dependencies {
+                // Koin
+                implementation("io.insert-koin:koin-core:3.2.2")
+            }
+        }
         val commonTest by getting {
             dependencies {
                 implementation(kotlin("test"))
+
+                // Koin
+                implementation("io.insert-koin:koin-test:3.2.2")
             }
         }
 
-        val androidMain by getting
+        val androidMain by getting {
+            dependencies {
+                // WalletConnect
+                implementation("com.walletconnect:android-core:1.5.0") // WalletConnect Core SDK.
+                implementation("com.walletconnect:sign:2.3.0") // WalletConnect v2 Sign protocol.
+
+                // Log
+                api("com.jakewharton.timber:timber:5.0.1") // A logger with a small, extensible API which provides utility on top of Android's normal Log class.
+            }
+        }
         val androidTest by getting
 
         val iosX64Main by getting

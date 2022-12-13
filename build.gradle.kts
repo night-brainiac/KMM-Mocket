@@ -10,7 +10,7 @@ plugins {
     id("com.google.gms.google-services").version("4.3.14").apply(false)
     id("com.google.firebase.crashlytics").version("2.9.2").apply(false)
 
-    // Dokka
+    // Document Generator
     id("org.jetbrains.dokka").version("1.7.20")
 
     // Linter

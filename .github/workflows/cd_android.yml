@@ -11,7 +11,7 @@ on:
   workflow_dispatch: # Allows you to run this workflow manually from the Actions tab
 jobs:
   gradle_validation:
-    name: vValidate Gradle Wrapper
+    name: Validate Gradle Wrapper
     runs-on: ubuntu-latest
     steps:
 

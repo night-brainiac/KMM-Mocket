@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <data-extraction-rules>
+
+    <!-- WalletConnect -->
+    <exclude
+        domain="database"
+        path="WalletConnectV2.db" />
+
     <cloud-backup>
         <!--
         TODO: Use <include> and <exclude> to control what is backed up.

@@ -1,4 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Mocket</string>
+    
+    <!-- Navigation -->
+    <string name="nav_home">Home</string>
+    <string name="nav_chart">Chart</string>
+    <string name="nav_profile">Profile</string>
+    <string name="nav_more">More</string>
+
+    <!-- Content Description -->
+    <string name="cd_icon">Icon</string>
+    <string name="cd_navigation_drawer">Navigation Drawer</string>
+
+    <!-- Empty Screen -->
+    <string name="empty_screen_tv_title">Coming Soon</string>
+    <string name="empty_screen_tv_subtitle">This screen is still under construction.</string>
 </resources>

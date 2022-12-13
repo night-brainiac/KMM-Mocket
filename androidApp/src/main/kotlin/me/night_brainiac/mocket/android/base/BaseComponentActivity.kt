@@ -1,4 +1,4 @@
-package me.night_brainiac.mocket.android
+package me.night_brainiac.mocket.android.base
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
