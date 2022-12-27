@@ -1,6 +1,7 @@
 package me.night_brainiac.mocket.android.ui
 
 import android.os.Bundle
+import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.material.*
 import androidx.compose.material3.windowsizeclass.ExperimentalMaterial3WindowSizeClassApi
@@ -10,16 +11,26 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.DpSize
 import androidx.compose.ui.unit.dp
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import com.google.accompanist.adaptive.calculateDisplayFeatures
-import me.night_brainiac.mocket.android.base.BaseComponentActivity
+import com.google.firebase.analytics.FirebaseAnalytics
+import com.google.firebase.analytics.ktx.analytics
+import com.google.firebase.ktx.Firebase
 import me.night_brainiac.mocket.android.ui.navigation.AdaptiveLayouts
 import me.night_brainiac.mocket.android.ui.theme.MocketTheme
 
-class MainActivity : BaseComponentActivity() {
+class MainActivity : ComponentActivity() {
+
+    private lateinit var firebaseAnalytics: FirebaseAnalytics
 
     @OptIn(ExperimentalMaterial3WindowSizeClassApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {
+        installSplashScreen()
         super.onCreate(savedInstanceState)
+
+        // Obtain the FirebaseAnalytics instance.
+        firebaseAnalytics = Firebase.analytics
+
         setContent {
             MocketTheme {
                 val windowSize = calculateWindowSizeClass(this)

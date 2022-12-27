@@ -157,11 +157,10 @@ fun PermanentNavigationDrawerContent(
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     Image(
-                        painter = painterResource(id = R.mipmap.icon_round),
+                        painter = painterResource(id = R.drawable.icon_foreground),
                         contentDescription = stringResource(id = R.string.cd_icon),
                         modifier = Modifier
                             .size(40.dp)
-                            .padding(8.dp)
                     )
                     Text(
                         modifier = Modifier.padding(top = 16.dp, bottom = 16.dp),

@@ -26,15 +26,13 @@ kotlin {
         val commonMain by getting {
             dependencies {
                 // Koin
-                implementation("io.insert-koin:koin-core:3.2.2")
+                implementation("io.insert-koin:koin-core:3.3.0")
+                implementation("io.insert-koin:koin-test:3.3.0")
             }
         }
         val commonTest by getting {
             dependencies {
                 implementation(kotlin("test"))
-
-                // Koin
-                implementation("io.insert-koin:koin-test:3.2.2")
             }
         }
 

@@ -6,7 +6,6 @@ import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidFileProperties
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
-import org.koin.core.logger.Level
 import timber.log.Timber
 
 class MocketApplication : Application() {
@@ -14,11 +13,11 @@ class MocketApplication : Application() {
         super.onCreate()
 
         startKoin {
-            androidLogger(Level.DEBUG)
-            androidContext(this@MocketApplication)
-            androidFileProperties()
+            androidLogger() // Log Koin into Android logger(Level.INFO by default)
+            androidContext(this@MocketApplication) // Reference Android context
+            androidFileProperties() // Use properties from assets/koin.properties
 
-            modules(appModule)
+            modules(appModule) // Load modules
         }
 
         if (BuildConfig.DEBUG) Timber.plant(Timber.DebugTree())

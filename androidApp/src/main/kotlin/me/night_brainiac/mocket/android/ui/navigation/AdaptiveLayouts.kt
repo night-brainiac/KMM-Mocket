@@ -43,24 +43,25 @@ fun AdaptiveLayouts(windowSize: WindowSizeClass, displayFeatures: List<DisplayFe
      * This will help us select type of navigation and content type depending on window size and fold state of the device.
      */
     val navigationType: NavigationType
-    val paneType: PaneType
+    val contentType: NavigationContentType
     when (windowSize.widthSizeClass) {
         WindowWidthSizeClass.Compact -> {
             navigationType = NavigationType.BOTTOM_NAVIGATION
-            paneType = PaneType.SINGLE_PANE
+            contentType = NavigationContentType.SINGLE_PANE
         }
         WindowWidthSizeClass.Medium -> {
             navigationType = NavigationType.NAVIGATION_RAIL
-            paneType = if (foldingDevicePosture != DevicePosture.NormalPosture) PaneType.DUAL_PANE else PaneType.SINGLE_PANE
+            contentType =
+                if (foldingDevicePosture != DevicePosture.NormalPosture) NavigationContentType.DUAL_PANE else NavigationContentType.SINGLE_PANE
         }
         WindowWidthSizeClass.Expanded -> {
             navigationType =
                 if (foldingDevicePosture is DevicePosture.BookPosture) NavigationType.NAVIGATION_RAIL else NavigationType.PERMANENT_NAVIGATION_DRAWER
-            paneType = PaneType.DUAL_PANE
+            contentType = NavigationContentType.DUAL_PANE
         }
         else -> {
             navigationType = NavigationType.BOTTOM_NAVIGATION
-            paneType = PaneType.SINGLE_PANE
+            contentType = NavigationContentType.SINGLE_PANE
         }
     }
 
@@ -76,7 +77,7 @@ fun AdaptiveLayouts(windowSize: WindowSizeClass, displayFeatures: List<DisplayFe
 
     NavigationWrapper(
         navigationType = navigationType,
-        paneType = paneType,
+        contentType = contentType,
         displayFeatures = displayFeatures,
         navigationContentPosition = navigationContentPosition
     )
@@ -86,7 +87,7 @@ fun AdaptiveLayouts(windowSize: WindowSizeClass, displayFeatures: List<DisplayFe
 @Composable
 private fun NavigationWrapper(
     navigationType: NavigationType,
-    paneType: PaneType,
+    contentType: NavigationContentType,
     displayFeatures: List<DisplayFeature>,
     navigationContentPosition: NavigationContentPosition
 ) {
@@ -106,9 +107,9 @@ private fun NavigationWrapper(
                 navigateToTopLevelDestination = navigationActions::navigateTo
             )
         }) {
-            NavContent(
+            NavigationContent(
                 navigationType = navigationType,
-                paneType = paneType,
+                contentType = contentType,
                 displayFeatures = displayFeatures,
                 navigationContentPosition = navigationContentPosition,
                 navController = navController,
@@ -134,9 +135,9 @@ private fun NavigationWrapper(
             },
             drawerState = drawerState
         ) {
-            NavContent(
+            NavigationContent(
                 navigationType = navigationType,
-                paneType = paneType,
+                contentType = contentType,
                 displayFeatures = displayFeatures,
                 navigationContentPosition = navigationContentPosition,
                 navController = navController,
@@ -152,10 +153,10 @@ private fun NavigationWrapper(
 }
 
 @Composable
-fun NavContent(
+fun NavigationContent(
     modifier: Modifier = Modifier,
     navigationType: NavigationType,
-    paneType: PaneType,
+    contentType: NavigationContentType,
     displayFeatures: List<DisplayFeature>,
     navigationContentPosition: NavigationContentPosition,
     navController: NavHostController,
@@ -180,7 +181,7 @@ fun NavContent(
             NavHost(
                 modifier = Modifier.weight(1f),
                 navController = navController,
-                paneType = paneType,
+                contentType = contentType,
                 displayFeatures = displayFeatures,
                 navigationType = navigationType
             )
@@ -199,7 +200,7 @@ private fun NavHost(
     modifier: Modifier = Modifier,
     navController: NavHostController = rememberNavController(),
     displayFeatures: List<DisplayFeature>,
-    paneType: PaneType,
+    contentType: NavigationContentType,
     navigationType: NavigationType
 ) {
     NavHost(

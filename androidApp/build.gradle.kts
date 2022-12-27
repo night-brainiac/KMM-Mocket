@@ -54,6 +54,9 @@ dependencies {
     // Modules
     implementation(project(":shared"))
 
+    // Splash Screen
+    implementation("androidx.core:core-splashscreen:1.0.0")
+
     // Compose UI
     implementation(platform("androidx.compose:compose-bom:2022.10.00"))
     implementation("androidx.compose.material3:material3") // Includes updated theming and components and Material You personalization features like dynamic color.
@@ -75,8 +78,8 @@ dependencies {
     implementation("com.google.firebase:firebase-perf-ktx") // Collect performance data.
 
     // Koin - A pragmatic lightweight dependency injection framework
-    implementation("io.insert-koin:koin-android:3.3.0") // Android
-    implementation("io.insert-koin:koin-androidx-compose:3.3.0") // Jetpack Compose
+    implementation("io.insert-koin:koin-android:3.3.1") // Android
+    implementation("io.insert-koin:koin-androidx-compose:3.4.0") // Jetpack Compose
     implementation("io.insert-koin:koin-androidx-navigation:3.3.0") // Jetpack Navigation
 
     // Detection

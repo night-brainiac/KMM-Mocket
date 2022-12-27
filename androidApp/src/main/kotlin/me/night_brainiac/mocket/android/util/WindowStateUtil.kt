@@ -49,6 +49,6 @@ enum class NavigationContentPosition {
 /**
  * Number of Panes shown based on device size and state.
  */
-enum class PaneType {
+enum class NavigationContentType {
     SINGLE_PANE, DUAL_PANE
 }
