@@ -26,7 +26,7 @@ tasks.dokkaHtmlMultiModule.configure {
 val ktLint: Configuration by configurations.creating
 
 dependencies {
-    ktLint("com.pinterest:ktlint:0.47.1") {
+    ktLint("com.pinterest:ktlint:0.48.1") {
         attributes {
             attribute(Bundling.BUNDLING_ATTRIBUTE, objects.named(Bundling.EXTERNAL))
         }
